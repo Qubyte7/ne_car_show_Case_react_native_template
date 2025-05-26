@@ -9,11 +9,11 @@ const { width } = Dimensions.get('window')
 const CARD_WIDTH = width - 32 // 16px padding on each side
 
 export default function CarCard({ id, name, description, rating, image }: {
-    id: number,
-    name: string,
-    description: string,
-    rating: Float,
-    image: string
+    readonly id: number,
+    readonly name: string,
+    readonly description: string,
+    readonly rating: Float,
+    readonly image: string
 }) {
     return (
     

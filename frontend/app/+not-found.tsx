@@ -2,22 +2,19 @@ import React from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { router } from 'expo-router'
-
 const NotFound = () => {
   return (
     <View style={styles.container}>
       {/* Error Icon */}
       <Ionicons name="warning-outline" size={100} color="#FF7300" />
-      
       {/* Error Message */}
       <Text style={styles.title}>Oops!</Text>
       <Text style={styles.subtitle}>Page Not Found</Text>
       <Text style={styles.description}>
         The page you&apos;re looking for doesn&apos;t exist or has been moved.
       </Text>
-
       {/* Back Button */}
-      <TouchableOpacity 
+      <TouchableOpacity
         style={styles.button}
         onPress={() => router.back()}
       >
@@ -27,7 +24,6 @@ const NotFound = () => {
     </View>
   )
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -71,5 +67,4 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Medium',
   },
 })
-
 export default NotFound

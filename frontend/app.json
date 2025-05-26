@@ -1,10 +1,15 @@
 {
   "expo": {
-    "name": "BEEP",
+    "name": "GREAT BEEP",
     "slug": "frontend",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/logo-orange.png",
+      "splash": {
+      "image": "./assets/images/logo-white.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#FF7300"
+    },
     "scheme": "frontend",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -13,22 +18,22 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/logo-orange.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/images/logo-white.png",
+        "backgroundColor": "#FF7300"
       },
       "edgeToEdgeEnabled": true
     },
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/logo-orange.png"
+      "favicon": "./assets/images/logo-white.png"
     },
     "plugins": [
       "expo-router",
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
+          "image": "./assets/images/logo-white.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#FF7300"

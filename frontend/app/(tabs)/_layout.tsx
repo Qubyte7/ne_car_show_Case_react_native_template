@@ -5,6 +5,16 @@ import { Ionicons } from "@expo/vector-icons";
 
 const orangeLogo = require('@/assets/images/logo-orange.png');
 
+function HeaderLeft({ logo }: { readonly logo: any }) {
+  return (
+    <Image 
+      source={logo}
+      contentFit="contain"
+      style={{ width: 60, height: 60, marginLeft: 15 }}
+    />
+  );
+}
+
 export default function TabsLayout() {
   return (
     <Tabs 
@@ -27,20 +37,14 @@ export default function TabsLayout() {
                     }
                     return icon
                 },
-                        tabBarActiveTintColor: '#FF7300', // Color when tab is focused
+        tabBarActiveTintColor: '#FF7300', // Color when tab is focused
         tabBarInactiveTintColor: '#B1B1B1', // Color when tab is not focused
         tabBarLabelStyle: {
           fontSize: 12,
           fontFamily: 'Poppins-Medium',
         },
         headerTitle: '', // Removes the header title
-        headerLeft: () => (
-          <Image 
-            source={orangeLogo}
-            contentFit="contain"
-            style={{ width: 60, height: 60, marginLeft: 15 }}
-          />
-        ),
+        headerLeft: () => <HeaderLeft logo={orangeLogo} />,
       })}>
       <Tabs.Screen 
         name="Home" 

@@ -117,29 +117,26 @@ function AppContent({ onLayoutRootView }: AppContentProps) {
   return (
     <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
       <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen 
-          name="index" 
+        <Stack.Screen
+          name="index"
           redirect={!!user}
         />
-        <Stack.Screen 
-          name="(auth)" 
+        <Stack.Screen
+          name="(auth)"
           redirect={!!user}
         />
-        <Stack.Screen 
-          name="(tabs)" 
+        <Stack.Screen
+          name="(tabs)"
           redirect={!user}
         />
-        <Stack.Screen 
-          name="UpdateCar" 
+        <Stack.Screen
+          name="UpdateCar"
           redirect={!user}
         />
-        <Stack.Screen 
-          name="+not-found" 
+        <Stack.Screen
+          name="+not-found"
         />
       </Stack>
     </View>
   );
 }
-
-
-

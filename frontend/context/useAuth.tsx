@@ -3,8 +3,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { usePathname, useRouter } from "expo-router";
 import { createContext, useContext, useEffect, useState, useMemo } from "react";
 import { useToast } from "react-native-toast-notifications";
-import api from "../api/api"; // Adjust the import path as necessary
-import { User } from "../types/User"; // Adjust the import path as necessary
+import axios from "../api/api";
+import { User } from "../types/index";
+
 interface AuthContextType {
     user: User | null;
     login: (email: string, password: string) => Promise<void>;
@@ -15,7 +16,9 @@ interface AuthContextType {
     loggingOut: boolean;
     initialLoading: boolean;
 }
+
 const AuthContext = createContext<AuthContextType | null>(null);
+
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const router = useRouter();
     const toast = useToast();
@@ -24,6 +27,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [loggingOut, setLoggingOut] = useState(false);
     const [initialLoading, setInitialLoading] = useState(true);
     const [user, setUser] = useState<User | null>(null);
+
     const pathname = usePathname();
 
     useEffect(() => {
@@ -33,7 +37,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
         const fetchUser = async () => {
             try {
-                const { data } = await api.get("/users/me");
+                const { data } = await axios.get("/users/me");
                 setUser(data.user);
             } catch (error: any) {
                 setUser(null);
@@ -41,8 +45,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 if (typeof error === "object" && error !== null && "response" in error) {
                     // handle specific error cases if needed
                 }
-                if (!['/', '/login', '/signup'].includes(pathname)) {
-                    router.push("/(auth)/Login");
+                if (!['/', '/Login', '/Register'].includes(pathname)) {
+                    router.push("/Login");
                 }
             } finally {
                 setInitialLoading(false);
@@ -51,10 +55,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         fetchUser();
     }
         , [pathname, user]);
+
     const login = async (email: string, password: string) => {
         setLoggingIn(true);
         try {
-            const { data } = await api.post("/users/login", {
+            const { data } = await axios.post("/users/login", {
                 email,
                 password,
             });
@@ -95,10 +100,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             setLoggingIn(false);
         }
     };
+
     const register = async (name: string, email: string, password: string) => {
         setRegistering(true);
         try {
-            await api.post("/users/register", {
+            await axios.post("/users/register", {
                 name,
                 email,
                 password,
@@ -106,7 +112,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             toast.show("Registered successfully", {
                 type: "success",
             });
-            router.push("/(auth)/Login");
+            router.push("/Login");
         } catch (error: any) {
             console.log(error)
             toast.show(error?.response?.data?.message ?? "An error occurred", {
@@ -116,6 +122,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             setRegistering(false);
         }
     };
+
+
     const logout = async () => {
         setLoggingOut(true);
         try {
@@ -124,7 +132,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             toast.show("Logged out successfully", {
                 type: "success",
             });
-            router.push("/(auth)/Login");
+            router.push("/Login");
         } catch (error) {
             console.error("Logout error:", error);
             toast.show("An error occurred", {
@@ -134,6 +142,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             setLoggingOut(false);
         }
     };
+
     const contextValue = useMemo(() => ({
         user,
         login,
@@ -144,12 +153,15 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         loggingOut,
         initialLoading
     }), [user, loggingIn, registering, loggingOut, initialLoading]);
+
     return (
         <AuthContext.Provider value={contextValue}>
             {children}
         </AuthContext.Provider>
     );
+
 }
+
 export default function useAuth() {
     const context = useContext(AuthContext);
     if (!context) {
@@ -157,3 +169,4 @@ export default function useAuth() {
     }
     return context;
 }
+

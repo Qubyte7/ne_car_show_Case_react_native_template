@@ -3,6 +3,16 @@ import { View, Text, TextInput, FlatList } from "react-native";
 import { cars } from "@/constants/dummyData";
 import CarCard from "@/components/CarCard";
 
+function ListEmptyComponent() {
+  return (
+    <View className="flex-1 items-center justify-center mt-5">
+      <Text className="text-xl text-gray-400 font-poppins-medium">
+        No cars available
+      </Text>
+    </View>
+  );
+}
+
 export default function Home() {
   return (
     <View className="flex-1 bg-white">
@@ -33,15 +43,9 @@ export default function Home() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
           padding: 16,
-          alignItems: 'center' // Centers cards horizontally
+          alignItems: 'center' 
         }}
-        ListEmptyComponent={() => (
-          <View className="flex-1 items-center justify-center mt-5">
-            <Text className="text-xl text-gray-400 font-poppins-medium">
-              No cars available
-            </Text>
-          </View>
-        )}
+        ListEmptyComponent={ListEmptyComponent}
       />
     </View>
   );

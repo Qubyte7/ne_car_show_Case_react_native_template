@@ -1,6 +1,5 @@
-import React from 'react'
+import React from 'react';
 import { StyleSheet, View } from 'react-native'
-import { Image } from 'expo-image';
 import { layout } from "@/constants/Layout";
 
 export const AppLayout = ({ children }: { children: React.ReactNode }) => {

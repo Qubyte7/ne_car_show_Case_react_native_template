@@ -11,7 +11,7 @@ import {
   Keyboard,
 } from "react-native";
 import { Image } from "expo-image";
-import { layout } from "@/constants/Layout";
+import { layout } from "@/constants/Layout"; 
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
 import { Link } from "expo-router";
@@ -19,6 +19,7 @@ import useAuth from "@/context/useAuth";
 import { useToast } from "react-native-toast-notifications";
 import { validateEmail, validatePassword } from "@/utils/utils";
 const orangeLogo = require("@/assets/images/logo-orange.png");
+
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const toast = useToast();
@@ -65,6 +66,7 @@ export default function Login() {
                 style={styles.logo}
               />
             </View>
+
             <View style={styles.form}>
               <View style={styles.inputContainer}>
                 <TextInput
@@ -77,6 +79,7 @@ export default function Login() {
                 />
                 <View style={styles.borderBottom} />
               </View>
+
               <View className="relative" style={styles.inputContainer}>
                 <TextInput
                   placeholder="Password . . ."
@@ -99,6 +102,7 @@ export default function Login() {
                 </TouchableOpacity>
                 <View style={styles.borderBottom} />
               </View>
+
               <TouchableOpacity
                 className="bg-primary p-4 rounded-full mb-7"
                 onPress={() => handleSubmit()}
@@ -107,6 +111,7 @@ export default function Login() {
                   Login
                 </Text>
               </TouchableOpacity>
+
               <Text className="font-poppins-regular text-center mt-8">
                 Already have an account?
                 <Link href="/(auth)/Register">
@@ -123,6 +128,7 @@ export default function Login() {
     </KeyboardAvoidingView>
   );
 }
+
 const styles = StyleSheet.create({
   logo: {
     width: layout.logoWidth,

@@ -2,18 +2,12 @@ import React from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { Image } from 'expo-image'
 import { Ionicons } from '@expo/vector-icons'
-import { router } from 'expo-router'
 import useAuth from '@/context/useAuth'
 
 const profileImage = require('@/assets/images/profile.png')
 
 export default function Profile() {
-  const {logout} = useAuth()
-  const handleLogout = () => {
-    // Add your logout logic here
-    logout();
-  }
-
+  const { logout } = useAuth();
   return (
     <View className="flex-1 bg-white">
       {/* Profile Header */}
@@ -50,7 +44,7 @@ export default function Profile() {
         {/* Logout Button */}
         <TouchableOpacity 
           className="bg-palered rounded-xl py-4 mt-4"
-          onPress={handleLogout}
+          onPress={logout}
         >
           <View className="flex-row justify-center items-center">
             <Ionicons name="log-out-outline" size={24} color="#fff" />

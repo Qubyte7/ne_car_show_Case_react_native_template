@@ -1,9 +1,11 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
+
 // Create Axios instance
 const api = axios.create({
   baseURL: "http://10.12.75.225:5054",
 });
+
 // Attach interceptor to automatically add token to headers
 api.interceptors.request.use(
   async (config) => {
@@ -17,10 +19,5 @@ api.interceptors.request.use(
     return Promise.reject(new Error(error?.message ?? String(error)));
   }
 );
+
 export default api;
-
-
-
-
-
-

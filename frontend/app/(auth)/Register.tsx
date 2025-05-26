@@ -12,13 +12,16 @@ import {
 } from "react-native";
 import { Image } from "expo-image";
 import { Link } from "expo-router";
-import { layout } from "@/constants/Layout";
+import { layout } from "@/constants/Layout"; 
 import { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { validateEmail, validateName, validatePassword } from "@/utils/utils";
 import useAuth from "@/context/useAuth";
 import { useToast } from "react-native-toast-notifications";
+
+
 const orangeLogo = require('@/assets/images/logo-orange.png');
+
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const toast = useToast();
@@ -28,14 +31,18 @@ export default function Register() {
     email: "",
     password: "",
   });
+
   const handleSubmit = () => {
     const { name, email, password } = formData;
+
     if (!name || !email || !password) {
       return toast.show("Please fill in all fields", { type: "danger" });
     }
+
     const nameCheck = validateName(name);
     const emailCheck = validateEmail(email);
     const passCheck = validatePassword(password);
+
     if (!nameCheck.valid) {
       return toast.show(nameCheck.message, { type: "danger" });
     }
@@ -45,8 +52,10 @@ export default function Register() {
     if (!passCheck.valid) {
       return toast.show(passCheck.message, { type: "danger" });
     }
+
     register(name, email, password);
   };
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -64,6 +73,7 @@ export default function Register() {
               <Text className="text-2xl font-poppins-semibold text-[#FFA45A]">Signup</Text>
               <Image source={orangeLogo} contentFit="contain" style={styles.logo} />
             </View>
+
             <View style={styles.form}>
               <View style={styles.inputContainer}>
                 <TextInput
@@ -87,6 +97,7 @@ export default function Register() {
                 />
                 <View style={styles.borderBottom} />
               </View>
+
               <View className="relative" style={styles.inputContainer}>
                 <TextInput
                   placeholder="Password . . ."
@@ -109,11 +120,13 @@ export default function Register() {
                 </TouchableOpacity>
                 <View style={styles.borderBottom} />
               </View>
+
               <TouchableOpacity className="bg-primary p-4 rounded-full mb-7" onPress={() => handleSubmit()}>
                 <Text className="font-poppins-bold text-xl text-white text-center">
                   Signup
                 </Text>
               </TouchableOpacity>
+
               <Text className="font-poppins-regular text-center mt-8">
                 Don&apos;t have an account?
                 <Link href="/(auth)/Login">
@@ -127,35 +140,27 @@ export default function Register() {
     </KeyboardAvoidingView>
   );
 }
+
 const styles = StyleSheet.create({
   logo: {
-    width: layout.logoWidth,     // Ensure layout.logoWidth is defined in your constants
-    height: layout.logoHeight,   // Ensure layout.logoHeight is defined in your constants
+    width: layout.logoWidth,
+    height: layout.logoHeight,
     marginVertical: 20,
   },
   form: {
-    paddingHorizontal: layout.spacingHorizontal || 20, // Provide a fallback if layout.spacingHorizontal is undefined
+    paddingHorizontal: layout.spacingHorizontal || 20, 
   },
   inputContainer: {
     position: 'relative',
-    marginBottom: 25, // You might want to slightly adjust this if needed after removing mb-4 from TextInput
+    marginBottom: 25, 
   },
   borderBottom: {
     position: 'absolute',
-    bottom: 0, // This will now be at the bottom of the inputContainer, right under the TextInput's padding
+    bottom: 0, 
     left: 0,
     right: 0,
     height: 2,
-    backgroundColor: '#B1B1B1', // A neutral gray color
-    borderRadius: 2, // Subtle rounding for the border itself
+    backgroundColor: '#B1B1B1', 
+    borderRadius: 2, 
   }
 });
-
-
-
-
-
-
-
-
-

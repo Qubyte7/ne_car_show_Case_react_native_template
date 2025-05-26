@@ -4,11 +4,9 @@ import { router } from 'expo-router';
 import { layout } from "@/constants/Layout";
 const homeImage = require('@/assets/images/car7.png');
 const WhiteLogo = require('@/assets/images/logo-white.png');
-
 const { width, height } = Dimensions.get('window');
 
 export default function Index() {
-
   const handleOnClick = ()=>{
     router.push('/(auth)/Login')
   }

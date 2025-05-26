@@ -11,7 +11,7 @@ import {
     Keyboard
 } from "react-native";
 import { router } from "expo-router";
-import { layout } from "@/constants/Layout"; // Ensure this path and its content are correct
+import { layout } from "@/constants/Layout"; 
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
 
@@ -70,7 +70,6 @@ export default function AddNewCar() {
                                         </TouchableOpacity>
                                     ))}
                                 </View>
-                                {/* Optional: Display current rating */}
                                 <Text className="font-poppins-regular text-sm text-gray-500 mt-1">
                                     Selected rating: {rating}/5
                                 </Text>
@@ -98,24 +97,24 @@ export default function AddNewCar() {
 
 const styles = StyleSheet.create({
     logo: {
-        width: layout.logoWidth,     // Ensure layout.logoWidth is defined in your constants
-        height: layout.logoHeight,   // Ensure layout.logoHeight is defined in your constants
+        width: layout.logoWidth, 
+        height: layout.logoHeight, 
         marginVertical: 20,
     },
     form: {
-        paddingHorizontal: layout.spacingHorizontal || 20, // Provide a fallback if layout.spacingHorizontal is undefined
+        paddingHorizontal: layout.spacingHorizontal || 20, 
     },
     inputContainer: {
         position: 'relative',
-        marginBottom: 25, // You might want to slightly adjust this if needed after removing mb-4 from TextInput
+        marginBottom: 25, 
     },
     borderBottom: {
         position: 'absolute',
-        bottom: 0, // This will now be at the bottom of the inputContainer, right under the TextInput's padding
+        bottom: 0, 
         left: 0,
         right: 0,
         height: 2,
-        backgroundColor: '#B1B1B1', // A neutral gray color
-        borderRadius: 2, // Subtle rounding for the border itself
+        backgroundColor: '#B1B1B1',
+        borderRadius: 2, 
     }
 });

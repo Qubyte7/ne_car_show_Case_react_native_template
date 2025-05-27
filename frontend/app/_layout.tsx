@@ -45,77 +45,79 @@ export default function RootLayout() {
     return null;
   }
   return (
-    <QueryClientProvider client={queryClient}>
+
     <ToastProvider
-        placement="top"
-        duration={3000}
-        animationType="slide-in"
-        animationDuration={250}
-        successColor="#4CAF50"
-        dangerColor="#FF5252"
-        warningColor="#FFC107"
-        normalColor="#757575"
-        offsetTop={40}
-        swipeEnabled={true}
-        renderToast={(toastOptions) => {
-          let backgroundColor = '#757575';
-          if (toastOptions.type === 'danger') {
-            backgroundColor = '#FF5252';
-          } else if (toastOptions.type === 'success') {
-            backgroundColor = '#4CAF50';
-          }
-          let iconName: keyof typeof Ionicons.glyphMap = 'information-circle';
-          if (toastOptions.type === 'danger') {
-            iconName = 'alert-circle';
-          } else if (toastOptions.type === 'success') {
-            iconName = 'checkmark-circle';
-          }
-          return (
-            <View
-              style={[
-                {
-                  paddingHorizontal: 16,
-                  paddingVertical: 12,
-                  borderRadius: 8,
-                  marginHorizontal: 16,
-                  marginVertical: 4,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  backgroundColor,
-                  shadowColor: "#000",
-                  shadowOffset: {
-                    width: 0,
-                    height: 2,
-                  },
-                  shadowOpacity: 0.25,
-                  shadowRadius: 3.84,
-                  elevation: 5,
+      placement="top"
+      duration={3000}
+      animationType="slide-in"
+      animationDuration={250}
+      successColor="#4CAF50"
+      dangerColor="#FF5252"
+      warningColor="#FFC107"
+      normalColor="#757575"
+      offsetTop={40}
+      swipeEnabled={true}
+      renderToast={(toastOptions) => {
+        let backgroundColor = '#757575';
+        if (toastOptions.type === 'danger') {
+          backgroundColor = '#FF5252';
+        } else if (toastOptions.type === 'success') {
+          backgroundColor = '#4CAF50';
+        }
+        let iconName: keyof typeof Ionicons.glyphMap = 'information-circle';
+        if (toastOptions.type === 'danger') {
+          iconName = 'alert-circle';
+        } else if (toastOptions.type === 'success') {
+          iconName = 'checkmark-circle';
+        }
+        return (
+          <View
+            style={[
+              {
+                paddingHorizontal: 16,
+                paddingVertical: 12,
+                borderRadius: 8,
+                marginHorizontal: 16,
+                marginVertical: 4,
+                flexDirection: 'row',
+                alignItems: 'center',
+                backgroundColor,
+                shadowColor: "#000",
+                shadowOffset: {
+                  width: 0,
+                  height: 2,
                 },
-              ]}
-            >
-              <Ionicons
-                name={iconName}
-                size={24}
-                color="white"
-                style={{ marginRight: 12 }}
-              />
-              <Text style={{
-                color: 'white',
-                fontSize: 14,
-                fontFamily: 'Poppins-Medium',
-                flex: 1,
-              }}>
-                {toastOptions.message}
-              </Text>
-            </View>
-          );
-        }}
-      >
+                shadowOpacity: 0.25,
+                shadowRadius: 3.84,
+                elevation: 5,
+              },
+            ]}
+          >
+            <Ionicons
+              name={iconName}
+              size={24}
+              color="white"
+              style={{ marginRight: 12 }}
+            />
+            <Text style={{
+              color: 'white',
+              fontSize: 14,
+              fontFamily: 'Poppins-Medium',
+              flex: 1,
+            }}>
+              {toastOptions.message}
+            </Text>
+          </View>
+        );
+      }}
+    >
       <AuthProvider>
-        <AppContent onLayoutRootView={onLayoutRootView} />
+        <QueryClientProvider client={queryClient}>
+          <AppContent onLayoutRootView={onLayoutRootView} />
+        </QueryClientProvider>
       </AuthProvider>
     </ToastProvider>
-    </QueryClientProvider>
+
   );
 }
 type AppContentProps = {

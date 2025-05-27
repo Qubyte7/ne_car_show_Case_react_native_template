@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { createCar, getCars, getCar, updateCar, deleteCar } from '@/api/carApi';
-import { CarCardProps } from '@/types/carType';
+import {  CarType } from '@/types/carType';
 
 export const useGetCars = () => {
   return useQuery({
@@ -20,7 +20,7 @@ export const useCreateCar = () => {
   const queryClient = useQueryClient();
   
   return useMutation({
-    mutationFn: (newCar: Omit<CarCardProps, 'id'>) => createCar(newCar),
+    mutationFn: (newCar: Omit<CarType, 'id'>) => createCar(newCar),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['cars'] });
     },

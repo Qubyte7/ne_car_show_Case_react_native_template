@@ -9,3 +9,11 @@ export interface CarCardProps {
     image: string;
 }
 
+
+
+export interface CarType {
+    id: number;
+    car_name: string;
+    description: string;
+    rating: Float;
+}

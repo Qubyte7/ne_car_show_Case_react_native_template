@@ -1,7 +1,9 @@
 import { Ionicons } from "@expo/vector-icons";
-import { View, Text, TextInput, FlatList } from "react-native";
-import { cars } from "@/constants/dummyData";
+import { View, Text, TextInput, FlatList, ActivityIndicator,RefreshControl } from "react-native";
 import CarCard from "@/components/CarCard";
+import { useGetCars } from "@/hooks/useCarApis";
+import { CarType } from "@/types/carType";
+import { useState ,useCallback} from "react";
 
 function ListEmptyComponent() {
   return (
@@ -14,6 +16,33 @@ function ListEmptyComponent() {
 }
 
 export default function Home() {
+  const { data: cars, isLoading, error,refetch } = useGetCars();
+    const [refreshing, setRefreshing] = useState(false);
+
+      const onRefresh = useCallback(async () => {
+    setRefreshing(true);
+    await refetch();
+    setRefreshing(false);
+  }, [refetch]);
+
+  if (isLoading) {
+    return (
+      <View className="flex-1 items-center justify-center">
+        <ActivityIndicator size="large" color="#FF7300" />
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View className="flex-1 items-center justify-center">
+        <Text className="text-xl text-red-500 font-poppins-medium">
+          Error loading cars
+        </Text>
+      </View>
+    );
+  }
+
   return (
     <View className="flex-1 bg-white">
       {/* Search Bar */}
@@ -31,13 +60,12 @@ export default function Home() {
       <FlatList
         data={cars}
         keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
+        renderItem={({ item }: { item: CarType }) => (
           <CarCard
             id={item.id}
-            name={item.name}
+            name={item.car_name}
             description={item.description}
             rating={item.rating}
-            image={item.image}
           />
         )}
         showsVerticalScrollIndicator={false}
@@ -46,6 +74,14 @@ export default function Home() {
           alignItems: 'center' 
         }}
         ListEmptyComponent={ListEmptyComponent}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            colors={["#FF7300"]}
+            tintColor="#FF7300"
+          />
+        }
       />
     </View>
   );

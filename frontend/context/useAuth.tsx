@@ -27,10 +27,15 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [loggingOut, setLoggingOut] = useState(false);
     const [initialLoading, setInitialLoading] = useState(true);
     const [user, setUser] = useState<User | null>(null);
+<<<<<<< HEAD
 
+=======
+    // const [token, setToken] = useState<string | null>(null);
+>>>>>>> af019472eacd4d80c4fd161ecf2b72a3279d9a80
     const pathname = usePathname();
-
+    
     useEffect(() => {
+        console.log(pathname)
         if (user) {
             setInitialLoading(false);
             return;
@@ -46,7 +51,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                     // handle specific error cases if needed
                 }
                 if (!['/', '/Login', '/Register'].includes(pathname)) {
+<<<<<<< HEAD
                     router.push("/Login");
+=======
+                    router.push("/(auth)/Login");
+>>>>>>> af019472eacd4d80c4fd161ecf2b72a3279d9a80
                 }
             } finally {
                 setInitialLoading(false);

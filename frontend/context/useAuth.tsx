@@ -24,9 +24,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [loggingOut, setLoggingOut] = useState(false);
     const [initialLoading, setInitialLoading] = useState(true);
     const [user, setUser] = useState<User | null>(null);
+    // const [token, setToken] = useState<string | null>(null);
     const pathname = usePathname();
-
+    
     useEffect(() => {
+        console.log(pathname)
         if (user) {
             setInitialLoading(false);
             return;
@@ -41,7 +43,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 if (typeof error === "object" && error !== null && "response" in error) {
                     // handle specific error cases if needed
                 }
-                if (!['/', '/login', '/signup'].includes(pathname)) {
+                if (!['/', '/Login', '/Register'].includes(pathname)) {
                     router.push("/(auth)/Login");
                 }
             } finally {
